@@ -1,7 +1,7 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes:2'
-vim.opt.undodir = 'undodir'
+vim.opt.undodir = vim.env.HOME .. '/.config/nvim/undodir'
 vim.opt.undofile = true
 vim.opt.updatetime = 200
 vim.opt.path:append {'**'}

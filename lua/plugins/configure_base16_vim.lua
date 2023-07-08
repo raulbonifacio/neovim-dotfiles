@@ -1,5 +1,5 @@
 
-local function configure_base16_theme()
+local function configure_base16_vim()
 	if vim.env.BASE16_THEME then
 		--vim.opt.termguicolors = true
 		--vim.g.base16_colorspace = 256
@@ -8,6 +8,6 @@ local function configure_base16_theme()
 	end
 end
 
-return configure_base16_theme
+return configure_base16_vim
 
 -- vim: sw=4 ts=4

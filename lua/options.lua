@@ -6,4 +6,6 @@ vim.opt.undofile = true
 vim.opt.updatetime = 200
 vim.opt.path:append {'**'}
 vim.opt.completeopt:remove {'preview'}
-vim.opt.completeopt:append {'menuone', 'noselect'}
+vim.opt.wildmode = 'full'
+
+-- vim: sw=4 ts=4

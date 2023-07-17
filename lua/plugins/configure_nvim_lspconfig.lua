@@ -30,10 +30,18 @@ local function configure_nvim_lspconfig()
 		},
 	}
 
+
 	vim.api.nvim_create_autocmd('LspAttach', {
 		group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 		callback = function(ev)
+			local opts = { buffer = ev.buf }
+
 			vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+			vim.keymap.set('n', '[s', vim.diagnostic.goto_prev, opts)
+			vim.keymap.set('n', ']s', vim.diagnostic.goto_next, opts)
+			vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+			vim.keymap.set('n', '<c-k>', vim.lsp.buf.hover, opts)
 		end,
 	})
 

@@ -6,6 +6,7 @@ local configure_nvim_treesitter = require('plugins.configure_nvim_treesitter')
 local packer = require('packer')
 
 packer.startup(function(use)
+	use 'mattn/emmet-vim'
 	use 'tpope/vim-sleuth'
 	use 'airblade/vim-gitgutter'
 	use { 'neovim/nvim-lspconfig', config = configure_nvim_lspconfig }

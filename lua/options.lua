@@ -10,5 +10,6 @@ vim.opt.completeopt:append {'menuone', 'noselect'}
 vim.opt.wildmode = 'full'
 vim.opt.cmdheight = 0
 vim.opt.scrolloff = 999
+vim.opt.mouse = nil
 
 -- vim: sw=4 ts=4

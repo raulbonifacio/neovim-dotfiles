@@ -6,3 +6,5 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 		vim.opt_local.formatprg = "autopep8 -"
 	end
 })
+
+-- vim: sw=4 ts=4

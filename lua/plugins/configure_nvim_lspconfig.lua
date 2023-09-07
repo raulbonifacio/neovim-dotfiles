@@ -7,6 +7,8 @@ local function configure_nvim_lspconfig()
 
 	local lspconfig = require('lspconfig')
 
+	lspconfig.jedi_language_server.setup {}
+
 	lspconfig.tsserver.setup {}
 
 	lspconfig.clangd.setup {}

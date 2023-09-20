@@ -1,6 +1,4 @@
-
 local function configure_nvim_lspconfig()
-
 	vim.diagnostic.config {
 		update_in_insert = true
 	}
@@ -20,7 +18,7 @@ local function configure_nvim_lspconfig()
 					version = 'LuaJIT',
 				},
 				diagnostics = {
-					globals = {'vim', 'love'},
+					globals = { 'vim', 'love' },
 				},
 				workspace = {
 					library = vim.api.nvim_get_runtime_file("", true),
@@ -31,7 +29,6 @@ local function configure_nvim_lspconfig()
 			},
 		},
 	}
-
 
 	vim.api.nvim_create_autocmd('LspAttach', {
 		group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -45,9 +42,11 @@ local function configure_nvim_lspconfig()
 			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, options)
 			vim.keymap.set('n', '<c-k>', vim.lsp.buf.hover, options)
 			vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, options)
+			vim.keymap.set('n', '<leader>f', function()
+				vim.lsp.buf.format { async = true }
+			end, opts)
 		end,
 	})
-
 end
 
 return configure_nvim_lspconfig

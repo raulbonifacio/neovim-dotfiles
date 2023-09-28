@@ -49,6 +49,19 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = function()
 		vim.opt_local.tabstop = 4
 		vim.opt_local.shiftwidth = 4
+		vim.keymap.set("n", "<leader>a", function()
+			local extension;
+
+			if vim.fn.expand("%:e:e") == "test.lua" then
+				extension = ".lua"
+			else
+				extension = ".test.lua"
+			end
+
+			local filename = vim.fn.expand("%:r:r") .. extension
+
+			vim.cmd.edit(filename)
+		end, { buffer = true })
 	end
 })
 

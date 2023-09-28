@@ -19,9 +19,14 @@ local function configure_nvim_lspconfig()
 				},
 				diagnostics = {
 					globals = { 'vim', 'love' },
+					disable = {
+						'redefined-local',
+						'lowercase-global'
+					}
 				},
 				workspace = {
 					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false
 				},
 				telemetry = {
 					enable = false

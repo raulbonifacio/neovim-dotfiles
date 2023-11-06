@@ -65,4 +65,16 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 	end
 })
 
+autocmd({ "RecordingEnter" }, {
+	callback = function()
+		vim.opt.cmdheight = 1
+	end
+})
+
+autocmd({ "RecordingLeave" }, {
+	callback = function()
+		vim.opt.cmdheight = 0
+	end
+})
+
 -- vim: sw=4 ts=4

@@ -16,5 +16,6 @@ vim.opt.complete:append { 'kiU' }
 vim.opt.wildmode = 'full'
 vim.opt.mouse = nil
 vim.opt.wildoptions:append { "fuzzy" }
+vim.opt.cmdheight = 0
 
 -- vim: sw=4 ts=4

@@ -47,6 +47,7 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = { "*.lua" },
 	callback = function()
+		vim.opt_local.errorformat = "lua: %f:%l: %m"
 		vim.opt_local.tabstop = 4
 		vim.opt_local.shiftwidth = 4
 		vim.keymap.set("n", "<leader>a", function()

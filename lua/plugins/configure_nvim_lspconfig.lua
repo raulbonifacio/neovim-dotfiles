@@ -15,7 +15,7 @@ local function configure_nvim_lspconfig()
 		settings = {
 			Lua = {
 				runtime = {
-					version = 'LuaJIT',
+					version = 'Lua 5.4',
 				},
 				diagnostics = {
 					globals = { 'vim', 'love' },

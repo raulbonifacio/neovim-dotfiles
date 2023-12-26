@@ -6,6 +6,10 @@ autocmd({ "BufWritePre" }, {
 		if not vim.opt_local.readonly:get() then
 			vim.cmd([[%s/\s\+$//ge]])
 		end
+
+		if vim.fn.executable('ctags') then
+			vim.fn.system(string.format('ctags -f .ctags --recurse --append %s', vim.fn.expand('<afile>')))
+		end
 	end
 })
 

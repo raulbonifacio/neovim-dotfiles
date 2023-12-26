@@ -15,7 +15,8 @@ local function configure_nvim_lspconfig()
 	}
 
 	lspconfig.clangd.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities()
+		capabilities = cmp_nvim_lsp.default_capabilities(),
+		filetypes = { "c" }
 	}
 
 	lspconfig.lua_ls.setup {

@@ -12,6 +12,7 @@ local function configure_base16_vim()
 			vim.cmd.highlight { "link TabLine Signcolumn", bang = true }
 			vim.cmd.highlight { "link PmenuSel Normal", bang = true }
 			vim.cmd.highlight { "link Pmenu Signcolumn", bang = true }
+			vim.cmd.highlight { "link CmpItemAbbr Signcolumn", bang = true }
 		end
 	})
 

@@ -8,7 +8,7 @@ autocmd({ 'BufWritePre' }, {
 		end
 
 		if vim.fn.executable('ctags') and vim.fn.filewritable('.ctags') then
-			vim.fn.system(string.format('ctags -f .ctags --recurse --append %s', vim.fn.expand('<afile>')))
+			vim.fn.system(string.format('ctags -f .ctags --recurse --append "%s"', vim.fn.expand('<afile>')))
 		end
 	end
 })

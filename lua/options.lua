@@ -1,6 +1,8 @@
 -- Disable Netrw
 vim.g.loaded_netrw = true
 vim.g.loaded_netrwPlugin = true
+
+-- Handle headers as C files
 vim.g.c_syntax_for_h = true
 
 -- Basic configuration

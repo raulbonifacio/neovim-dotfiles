@@ -25,6 +25,5 @@ vim.opt.cmdheight = 1
 vim.opt.tags:append({ '.ctags' })
 vim.opt.foldenable = false
 vim.opt.foldmethod = 'indent'
-vim.opt.cindent = false
 
 -- vim: sw=4 ts=4

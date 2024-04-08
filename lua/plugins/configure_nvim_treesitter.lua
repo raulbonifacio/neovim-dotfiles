@@ -7,7 +7,7 @@ local function configure_nvim_treesitter()
 		ignore_install = {},
 		ensure_installed = {},
 		indent = {
-			enable = false,
+			enable = true,
 		},
 		highlight = {
 			enable = true,

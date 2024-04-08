@@ -7,9 +7,18 @@ autocmd({ 'BufWritePre' }, {
 			vim.cmd([[%s/\s\+$//ge]])
 		end
 
-		if vim.fn.executable('ctags') and vim.fn.filewritable('.ctags') then
+		if vim.fn.executable('ctags') and vim.fn.filewritable('.ctags') == 1 then
 			vim.fn.system(string.format('ctags -f .ctags --recurse --append "%s"', vim.fn.expand('<afile>')))
 		end
+	end
+})
+
+autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	pattern = { '*.php' },
+	callback = function()
+		vim.opt_local.autoindent = true;
+		vim.opt_local.smartindent = true;
+		vim.opt_local.cindent = true;
 	end
 })
 

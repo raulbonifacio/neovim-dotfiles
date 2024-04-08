@@ -10,6 +10,10 @@ local function configure_nvim_lspconfig()
 		capabilities = cmp_nvim_lsp.default_capabilities()
 	}
 
+	lspconfig.phpactor.setup {
+		capabilities = cmp_nvim_lsp.default_capabilities()
+	}
+
 	lspconfig.tsserver.setup {
 		capabilities = cmp_nvim_lsp.default_capabilities()
 	}
@@ -59,6 +63,8 @@ local function configure_nvim_lspconfig()
 			vim.keymap.set('n', '<leader>f', function()
 				vim.lsp.buf.format { async = true }
 			end, opts)
+
+			vim.keymap.set({ 'n', 'v' }, '<leader><space>', vim.lsp.buf.code_action, options)
 		end,
 	})
 end

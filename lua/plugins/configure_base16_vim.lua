@@ -1,4 +1,3 @@
-
 local function configure_base16_vim()
 	vim.api.nvim_create_autocmd({ "Colorscheme" }, {
 		group = vim.api.nvim_create_augroup('base16-vim', { clear = true }),

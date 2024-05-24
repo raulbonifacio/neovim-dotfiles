@@ -51,18 +51,21 @@ local function configure_nvim_lspconfig()
 	vim.api.nvim_create_autocmd('LspAttach', {
 		group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 		callback = function(ev)
-			local options = { buffer = ev.buf }
+			local buf = ev.buf
+			local options = { buffer = buf }
 
-			vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+			vim.bo[buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+			vim.bo[buf].tagfunc = nil
+
 			vim.keymap.set('n', '[s', vim.diagnostic.goto_prev, options)
 			vim.keymap.set('n', ']s', vim.diagnostic.goto_next, options)
-			vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, options)
-			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, options)
+			vim.keymap.set('n', 'gD', vim.lsp.buf.definition, options)
+			vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, options)
 			vim.keymap.set('n', '<c-k>', vim.lsp.buf.hover, options)
 			vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, options)
 			vim.keymap.set('n', '<leader>f', function()
 				vim.lsp.buf.format { async = true }
-			end, opts)
+			end, options)
 
 			vim.keymap.set({ 'n', 'v' }, '<leader><space>', vim.lsp.buf.code_action, options)
 		end,

@@ -1,4 +1,3 @@
-
 local function configure_nvim_treesitter()
 	local treesitter = require('nvim-treesitter.configs')
 	treesitter.setup {

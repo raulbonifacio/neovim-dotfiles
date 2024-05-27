@@ -9,6 +9,7 @@ vim.g.c_syntax_for_h = true
 vim.opt.statusline = '%F%q%m%=%5.5l,%-5.5c%y'
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = 'yes:3'
 vim.opt.undodir = vim.env.HOME .. '/.config/nvim/undodir'
 vim.opt.undofile = true
 vim.opt.path:append { '**' }

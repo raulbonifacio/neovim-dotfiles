@@ -9,4 +9,12 @@ command('Find', 'edit <args>', {
 	end
 })
 
+command('Badd', function(arguments)
+	for _, glob in pairs(arguments.fargs) do
+		for _, filename in pairs(vim.fn.globpath('**', glob, true, true)) do
+			vim.cmd.badd(filename)
+		end
+	end
+end, { nargs = '+' })
+
 -- vim: sw=4 ts=4

@@ -4,7 +4,7 @@ local function configure_nvim_treesitter()
 		sync_install = false,
 		auto_install = false,
 		ignore_install = {},
-		ensure_installed = {},
+		ensure_installed = {"vimdoc", "vim", "c"},
 		indent = {
 			enable = true,
 		},

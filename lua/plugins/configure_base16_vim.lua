@@ -13,6 +13,7 @@ local function configure_base16_vim()
 			vim.cmd.highlight { "link Pmenu Signcolumn", bang = true }
 			vim.cmd.highlight { "link CmpItemAbbr Pmenu", bang = true }
 			vim.cmd.highlight { "link CmpItemAbbrMatch PmenuSel", bang = true }
+			vim.cmd.highlight { "link NormalFloat Pmenu", bang = true }
 		end
 	})
 

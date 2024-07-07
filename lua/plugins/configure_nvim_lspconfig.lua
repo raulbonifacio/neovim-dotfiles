@@ -4,27 +4,13 @@ local function configure_nvim_lspconfig()
 	}
 
 	local lspconfig = require('lspconfig')
-	local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-	lspconfig.jedi_language_server.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities()
-	}
-
-	lspconfig.phpactor.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities()
-	}
-
-	lspconfig.tsserver.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities()
-	}
 
 	lspconfig.clangd.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities(),
 		filetypes = { "c" }
 	}
 
 	lspconfig.lua_ls.setup {
-		capabilities = cmp_nvim_lsp.default_capabilities(),
 		settings = {
 			Lua = {
 				runtime = {

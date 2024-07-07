@@ -1,4 +1,4 @@
-require('plugins')
+require('plugins.init')
 require('options')
 require('commands')
 require('autocmds')

@@ -1,6 +1,25 @@
 local autocmd = vim.api.nvim_create_autocmd
+local group = vim.api.nvim_create_augroup("Autocmds", { clear = true })
+
+autocmd({ 'InsertCharPre' }, {
+	group = group,
+	pattern = { '*' },
+	callback = function()
+		if vim.fn.pumvisible() == 1 or vim.fn.state("m") == "m" then
+			return
+		end
+
+		if vim.fn.match(vim.v.char, "[a-zA-Z_$]") == -1 then
+			return
+		end
+
+		local key = vim.keycode("<C-n>")
+		vim.api.nvim_feedkeys(key, "m", false)
+	end
+})
 
 autocmd({ 'BufWritePre' }, {
+	group = group,
 	pattern = { '*' },
 	callback = function()
 		-- Remove trailing spaces
@@ -16,6 +35,7 @@ autocmd({ 'BufWritePre' }, {
 })
 
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	group = group,
 	pattern = { '*.py' },
 	callback = function()
 		-- Use autopep8 as the formatter.
@@ -26,6 +46,7 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 })
 
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	group = group,
 	pattern = { '*.json' },
 	callback = function()
 		-- Use jq as the formatter.
@@ -36,6 +57,7 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 })
 
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	group = group,
 	pattern = { '*.c', '*.h' },
 	callback = function()
 		vim.opt_local.tabstop = 4
@@ -64,11 +86,13 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 })
 
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	group = group,
 	pattern = { '*.lua' },
 	callback = function()
 		vim.opt_local.errorformat = 'lua: %f:%l: %m'
 		vim.opt_local.tabstop = 4
 		vim.opt_local.shiftwidth = 4
+		vim.opt_local.include = "require\\s*(\\?\\s*[\"\']\\zs.*\\ze[\"\']\\s*)\\?"
 
 		-- Use <leader> a to switch between .lua and .test.lua.
 		vim.keymap.set('n', '<leader>a', function()

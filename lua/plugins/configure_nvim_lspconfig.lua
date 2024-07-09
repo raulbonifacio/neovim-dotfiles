@@ -43,8 +43,8 @@ local function configure_nvim_lspconfig()
 			vim.bo[buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 			vim.bo[buf].tagfunc = nil
 
-			vim.keymap.set('n', '[s', vim.diagnostic.goto_prev, options)
-			vim.keymap.set('n', ']s', vim.diagnostic.goto_next, options)
+			vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, options)
+			vim.keymap.set('n', ']e', vim.diagnostic.goto_next, options)
 			vim.keymap.set('n', 'gD', vim.lsp.buf.definition, options)
 			vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, options)
 			vim.keymap.set('n', '<c-k>', vim.lsp.buf.hover, options)

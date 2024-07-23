@@ -14,6 +14,7 @@ autocmd({ 'InsertCharPre' }, {
 		end
 
 		local key = vim.keycode("<C-n>")
+
 		vim.api.nvim_feedkeys(key, "m", false)
 	end
 })
@@ -29,7 +30,7 @@ autocmd({ 'BufWritePre' }, {
 
 		-- Update the tags file.
 		if vim.fn.executable('ctags') and vim.fn.filewritable('.ctags') == 1 then
-			vim.fn.system(string.format('ctags -f .ctags --recurse --append "%s"', vim.fn.expand('<afile>')))
+			vim.fn.system(string.format('ctags -f .ctags --recurse "%s"', vim.fn.expand('<afile>')))
 		end
 	end
 })
@@ -70,17 +71,19 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 
 		-- Use <leader>a to switch between .c and .h
 		vim.keymap.set('n', '<leader>a', function()
-			local extension;
+			local base = vim.fn.expand('%:r')
+			local extension = vim.fn.expand('%:e')
+			local hfile = base .. '.h'
+			local cfile = base .. '.c'
+			local cppfile = base .. '.cpp'
 
-			if vim.fn.expand('%:e') == 'c' then
-				extension = '.h'
-			else
-				extension = '.c'
+			if extension == 'c' or extension == 'cpp' then
+				vim.cmd.edit(hfile)
+			elseif vim.fn.filereadable(cfile) == 1 then
+				vim.cmd.edit(cfile)
+			elseif vim.fn.filereadable(cppfile) == 1 then
+				vim.cmd.edit(cppfile)
 			end
-
-			local filename = vim.fn.expand('%:r') .. extension
-
-			vim.cmd.edit(filename)
 		end, { buffer = true })
 	end
 })

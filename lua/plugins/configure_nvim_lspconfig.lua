@@ -5,10 +5,7 @@ local function configure_nvim_lspconfig()
 
 	local lspconfig = require('lspconfig')
 
-
-	lspconfig.clangd.setup {
-		filetypes = { "c" }
-	}
+	lspconfig.clangd.setup {}
 
 	lspconfig.lua_ls.setup {
 		settings = {

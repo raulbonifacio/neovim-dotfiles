@@ -26,5 +26,6 @@ vim.opt.undofile = true
 vim.opt.updatetime = 200
 vim.opt.wildoptions:append { 'fuzzy' }
 vim.opt.wrap = false
+vim.opt.scrolloff = 10
 
 -- vim: sw=4 ts=4

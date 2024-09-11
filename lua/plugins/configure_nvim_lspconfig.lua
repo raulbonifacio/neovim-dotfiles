@@ -4,8 +4,14 @@ local function configure_nvim_lspconfig()
 	}
 
 	local lspconfig = require('lspconfig')
+	--
+	-- Set up lspconfig.
+	local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-	lspconfig.clangd.setup {}
+	lspconfig.clangd.setup {
+		capabilities = capabilities
+
+	}
 
 	lspconfig.lua_ls.setup {
 		settings = {
@@ -29,6 +35,7 @@ local function configure_nvim_lspconfig()
 				},
 			},
 		},
+		capabilities = capabilities
 	}
 
 	vim.api.nvim_create_autocmd('LspAttach', {

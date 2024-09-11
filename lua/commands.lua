@@ -1,6 +1,6 @@
 local command = vim.api.nvim_create_user_command
 
-command('Grep', 'lexpr system("grep --exclude \'.*\' -RIn <args>")', { nargs = 1 })
+command('Grep', 'cexpr system("grep --exclude \'.*\' -RIn <args>")', { nargs = 1 })
 
 command('Find', 'edit <args>', {
 	nargs = 1,
@@ -16,5 +16,21 @@ command('Badd', function(arguments)
 		end
 	end
 end, { nargs = '+' })
+
+command('CTagsCreate', function()
+	if vim.fn.executable('ctags') == 0 then
+		return
+	end
+
+	vim.system({ 'ctags', '-f', '.ctags', '--quiet', '--recurse', '*' })
+end, {})
+
+command('CTagsUpdate', function()
+	if vim.fn.executable('ctags') == 0 or vim.fn.filewritable('.ctags') == 0 then
+		return
+	end
+
+	vim.system({ 'ctags', '-f', '.ctags', '--quiet', '--recurse', vim.fn.expand('<afile>') })
+end, {})
 
 -- vim: sw=4 ts=4

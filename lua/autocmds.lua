@@ -1,23 +1,24 @@
 local autocmd = vim.api.nvim_create_autocmd
 local group = vim.api.nvim_create_augroup("Autocmds", { clear = true })
 
-autocmd({ 'InsertCharPre' }, {
-	group = group,
-	pattern = { '*' },
-	callback = function()
-		if vim.fn.pumvisible() == 1 or vim.fn.state("m") == "m" then
-			return
-		end
-
-		if vim.fn.match(vim.v.char, "[a-zA-Z_$]") == -1 then
-			return
-		end
-
-		local key = vim.keycode("<C-n>")
-
-		vim.api.nvim_feedkeys(key, "m", false)
-	end
-})
+-- autocmd({ 'InsertCharPre' }, {
+-- 	group = group,
+-- 	pattern = { '*' },
+-- 	callback = function()
+--
+-- 		if vim.fn.pumvisible() == 1 or vim.fn.state("m") == "m" then
+-- 			return
+-- 		end
+--
+-- 		if vim.fn.match(vim.v.char, "[a-zA-Z_$]") == -1 then
+-- 			return
+-- 		end
+--
+-- 		local key = vim.keycode("<C-n>")
+--
+-- 		vim.api.nvim_feedkeys(key, "m", false)
+-- 	end
+-- })
 
 autocmd({ 'BufWritePre' }, {
 	group = group,
@@ -26,11 +27,6 @@ autocmd({ 'BufWritePre' }, {
 		-- Remove trailing spaces
 		if not vim.opt_local.readonly:get() then
 			vim.cmd([[%s/\s\+$//ge]])
-		end
-
-		-- Update the tags file.
-		if vim.fn.executable('ctags') and vim.fn.filewritable('.ctags') == 1 then
-			vim.fn.system(string.format('ctags -f .ctags --recurse "%s"', vim.fn.expand('<afile>')))
 		end
 	end
 })

@@ -17,20 +17,31 @@ command('Badd', function(arguments)
 	end
 end, { nargs = '+' })
 
-command('CTagsCreate', function()
+command('CTags', function(arguments)
+
 	if vim.fn.executable('ctags') == 0 then
 		return
 	end
 
-	vim.system({ 'ctags', '-f', '.ctags', '--quiet', '--recurse', '*' })
-end, {})
+	local command = { 'ctags', '-f', '.ctags', '--kinds-all=*', '--recurse' }
 
-command('CTagsUpdate', function()
-	if vim.fn.executable('ctags') == 0 or vim.fn.filewritable('.ctags') == 0 then
-		return
+	local system_files = {
+		'/usr/include/string.h'
+	}
+
+	for _, file in pairs(system_files) do
+		table.insert(command, vim.fn.resolve(file))
 	end
 
-	vim.system({ 'ctags', '-f', '.ctags', '--quiet', '--recurse', vim.fn.expand('<afile>') })
-end, {})
+	for _, arg in pairs(arguments.fargs) do
+		table.insert(command, vim.fn.resolve(arg))
+	end
+
+	for _, part in pairs(command) do
+		vim.notify(part)
+	end
+
+	vim.system(command)
+end, { nargs = '*', complete='file' })
 
 -- vim: sw=4 ts=4

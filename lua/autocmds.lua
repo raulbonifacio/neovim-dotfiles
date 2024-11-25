@@ -5,7 +5,6 @@ local group = vim.api.nvim_create_augroup("Autocmds", { clear = true })
 -- 	group = group,
 -- 	pattern = { '*' },
 -- 	callback = function()
---
 -- 		if vim.fn.pumvisible() == 1 or vim.fn.state("m") == "m" then
 -- 			return
 -- 		end
@@ -14,7 +13,7 @@ local group = vim.api.nvim_create_augroup("Autocmds", { clear = true })
 -- 			return
 -- 		end
 --
--- 		local key = vim.keycode("<C-n>")
+-- 		local key = vim.keycode("<C-x><C-]>")
 --
 -- 		vim.api.nvim_feedkeys(key, "m", false)
 -- 	end
@@ -55,6 +54,34 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
 	group = group,
+	pattern = { '*.cpp', '*.hpp' },
+	callback = function()
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+
+		-- Use clang-format as formatter.
+		if vim.fn.executable('clang-format') == 0 then
+			vim.opt_local.formatprg = 'clang-format -style=file'
+		end
+
+		-- Use <leader>a to switch between .cpp and .hpp
+		vim.keymap.set('n', '<leader>a', function()
+			local base = vim.fn.expand('%:r')
+			local extension = vim.fn.expand('%:e')
+			local hppfile = base .. '.hpp'
+			local cppfile = base .. '.cpp'
+
+			if extension == 'cpp' then
+				vim.cmd.edit(hppfile)
+			elseif vim.fn.filereadable(cppfile) == 1 then
+				vim.cmd.edit(cppfile)
+			end
+		end, { buffer = true })
+	end
+})
+
+autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	group = group,
 	pattern = { '*.c', '*.h' },
 	callback = function()
 		vim.opt_local.tabstop = 4
@@ -71,14 +98,11 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
 			local extension = vim.fn.expand('%:e')
 			local hfile = base .. '.h'
 			local cfile = base .. '.c'
-			local cppfile = base .. '.cpp'
 
-			if extension == 'c' or extension == 'cpp' then
+			if extension == 'c' then
 				vim.cmd.edit(hfile)
 			elseif vim.fn.filereadable(cfile) == 1 then
 				vim.cmd.edit(cfile)
-			elseif vim.fn.filereadable(cppfile) == 1 then
-				vim.cmd.edit(cppfile)
 			end
 		end, { buffer = true })
 	end

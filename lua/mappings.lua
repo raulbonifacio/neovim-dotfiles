@@ -3,6 +3,7 @@ local del = vim.api.nvim_del_keymap
 
 del('n', '[d')
 del('n', ']d')
+set('n', 'K', '<cmd> Man <cr>', { silent = true })
 set('n', '<leader>l', '<cmd> luafile %<cr>', { silent = true })
 set('n', '<leader>cc', '<cmd>! ctags --recurse -f .ctags * <cr>', { silent = true })
 set('n', '[t', '<cmd> pop <cr>', { silent = true })

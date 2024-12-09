@@ -5,8 +5,13 @@ local function configure_nvim_lspconfig()
 
 	local lspconfig = require('lspconfig')
 
-	lspconfig.clangd.setup {
-	}
+	lspconfig.clangd.setup {}
+
+	lspconfig.phan.setup {}
+
+	lspconfig.eslint.setup {}
+
+	lspconfig.ts_ls.setup {}
 
 	lspconfig.lua_ls.setup {
 		settings = {

@@ -26,7 +26,9 @@ command('CTags', function(arguments)
 	local command = { 'ctags', '-f', '.ctags', '--kinds-all=*', '--recurse' }
 
 	local system_files = {
-		'/usr/include/string.h'
+		'/usr/include/string.h',
+		'/usr/include/stdlib.h',
+		'/usr/include/stdint.h'
 	}
 
 	for _, file in pairs(system_files) do
